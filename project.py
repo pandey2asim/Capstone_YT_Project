@@ -78,7 +78,7 @@ def get_channel_stats(youtube, channel_ids):
         }
 
         all_channel_stats.append(channel_data_dict)
-   
+    # print(all_channel_stats)
     return  all_channel_stats
 
 #create pandas dataframe from channel stats data. Returns a dataframe
@@ -162,6 +162,7 @@ def get_video_details(youtube, video_ids):
     
     return all_video_stats
 
+#function to get all video stats from all channel stats
 def get_all_video_stats(channel_stats):
 
     video_stats_df = pd.DataFrame(columns=['Title', 'Published_date', 'Views', 'Likes', 'Dislikes', 'Comments', 'channel_name', 'playlist_id'])
