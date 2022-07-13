@@ -5,6 +5,9 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
+from dotenv import load_dotenv
+
+load_dotenv()
 
 #five tech channels I love
 """
