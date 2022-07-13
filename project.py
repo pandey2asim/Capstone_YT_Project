@@ -60,8 +60,8 @@ def get_channel_stats(youtube, channel_ids):
         }
 
         all_channel_stats.append(channel_data_dict)
-    print(all_channel_stats)
-    # return  all_channel_stats
+    # print(all_channel_stats)
+    return  all_channel_stats
 
 
 
