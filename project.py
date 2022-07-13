@@ -35,5 +35,35 @@ channel_ids = ["UCOhHO2ICt0ti9KAh-QHvttQ",
              ]  
 # function to plot and save barplots
 #function for channel stats
+def get_channel_stats(youtube, channel_ids):
+    all_channel_stats = []
+
+    try:
+        request = youtube.channels().list(
+            part="snippet,contentDetails,statistics",
+            # if multiple id concatenate ids separated by comma.
+            id=",".join(channel_ids)
+        )
+        response = request.execute()
+        print(f'API call successful.')
+    except errors.HttpError as err:
+        raise Exception(err)
+
+    #iterate through items of interestfor every channel. 
+    for item in range(len(response['items'])):
+        channel_data_dict = {
+            "channel_name": response['items'][item]['snippet']['title'],
+            "subscribers": response['items'][item]['statistics']['subscriberCount'],
+            "views": response['items'][item]['statistics']['viewCount'],
+            "number_of_videos": response['items'][item]['statistics']['videoCount'],
+            "playlist_id": response['items'][item]['contentDetails']['relatedPlaylists']['uploads']
+        }
+
+        all_channel_stats.append(channel_data_dict)
+    print(all_channel_stats)
+    # return  all_channel_stats
+
+
+
 #function for video details
 #visualize data with pandas and seaborn libraries
