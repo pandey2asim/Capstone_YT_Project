@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 from matplotlib import rcParams
 from dotenv import load_dotenv
 
-load_dotenv()
+def configure():
+    load_dotenv()
 
 #five tech channels I love
 """
@@ -24,8 +25,10 @@ api_key = os.getenv("api_key")
 api_version = "v3"
 api_service = "youtube"
 api_key = f"{api_key}"
+
 # credential and API client
 youtube = build(api_service, api_version, developerKey=api_key)
+configure()
 
 channel_ids = ["UCOhHO2ICt0ti9KAh-QHvttQ",
                  "UCsTcErHg8oDvUnTzoqsYeNw",
@@ -62,7 +65,6 @@ def get_channel_stats(youtube, channel_ids):
         all_channel_stats.append(channel_data_dict)
     # print(all_channel_stats)
     return  all_channel_stats
-
 
 
 #function for video details
