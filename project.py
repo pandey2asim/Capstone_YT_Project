@@ -9,15 +9,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-#five tech channels I love
-"""
-        Channel Name     Channel ID   
-    1.	TechnicalGuruji: UCOhHO2ICt0ti9KAh-QHvttQ
-    2.	Unbox Therapy:   UCsTcErHg8oDvUnTzoqsYeNw
-    3.	Mkbhd (Mar) :    UCBJycsmduvYEL83R_U4JriQ
-    4.	Linus Tech Tips: UCXuqSBlHAE6Xw-yeJA0Tunw
-    5.	Coisa de Nerd:   UCuxfOdbKQy0tgGXcm9sjHiw
-"""
+def main():
+    #five tech channels I love
+    """
+            Channel Name     Channel ID   
+        1.	TechnicalGuruji: UCOhHO2ICt0ti9KAh-QHvttQ
+        2.	Unbox Therapy:   UCsTcErHg8oDvUnTzoqsYeNw
+        3.	Mkbhd (Mar) :    UCBJycsmduvYEL83R_U4JriQ
+        4.	Linus Tech Tips: UCXuqSBlHAE6Xw-yeJA0Tunw
+        5.	Coisa de Nerd:   UCuxfOdbKQy0tgGXcm9sjHiw
+    """
 
 # Youtube API key and service.
 api_key = os.getenv("api_key")
@@ -25,8 +26,7 @@ api_version = "v3"
 api_service = "youtube"
 api_key = f"{api_key}"
 
-print(api_key)
-
+#print(api_key)
 # credential and API client
 youtube = build(api_service, api_version, developerKey=api_key)
 
@@ -184,29 +184,27 @@ def get_all_video_stats(channel_stats):
 
     return video_stats_df
 
-def main():
-    #Block to fetch and plot channel data.
-    #Fetch youtube channel data from API.
-    channel_stats = get_channel_stats(youtube, channel_ids)
 
-    # Create a dataframe from the fetched youtube data.
-    channel_stats_df = channel_stats_to_df(channel_stats) 
+#Block to fetch and plot channel data.
+#Fetch youtube channel data from API.
+channel_stats = get_channel_stats(youtube, channel_ids)
 
-    # Save barplots as images
-    save_barplot('channel_name', 'views', channel_stats_df, 'views_by_channe.png')
-    save_barplot('channel_name', 'subscribers', channel_stats_df, 'subscribers_by_channel.png')
-    save_barplot('channel_name', 'number_of_videos', channel_stats_df, 'videos_by_channel.png')
+# Create a dataframe from the fetched youtube data.
+channel_stats_df = channel_stats_to_df(channel_stats) 
 
+# Save barplots as images
+save_barplot('channel_name', 'views', channel_stats_df, 'views_by_channe.png')
+save_barplot('channel_name', 'subscribers', channel_stats_df, 'subscribers_by_channel.png')
+save_barplot('channel_name', 'number_of_videos', channel_stats_df, 'videos_by_channel.png')
 
-    # Block to fetch and plot video stats data
-    all_video_stats = get_all_video_stats(channel_stats)
-    print(all_video_stats)
-    top_10_videos = all_video_stats.sort_values(by='Views', ascending=False).head(10)
+# Block to fetch and plot video stats data
+all_video_stats = get_all_video_stats(channel_stats)
+print(all_video_stats)
+top_10_videos = all_video_stats.sort_values(by='Views', ascending=False).head(10)
 
-    # bar plot top 10 videos
-    save_barplot('Views', 'Title', top_10_videos, 'top_10_videos_by_views.png')
-    #save_barplot('Views', 'channel_name', top_10_videos, 'top_10_videos_by_views_channel.png')
-
+# bar plot top 10 videos
+save_barplot('Views', 'Title', top_10_videos, 'top_10_videos_by_views.png')
+#save_barplot('Views', 'channel_name', top_10_videos, 'top_10_videos_by_views_channel.png')
 
 if __name__ == "__main__":
     main()
