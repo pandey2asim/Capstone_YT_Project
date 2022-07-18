@@ -39,7 +39,7 @@ channel_ids = ["UCOhHO2ICt0ti9KAh-QHvttQ",
 # function to plot and save barplots
 def save_barplot(x_axis, y_axis, data, filename):
 
-    #sns.set(rc={'figure.figsize':(24,10)})
+    # sns.set(rc={'figure.figsize':(24,10)})
     sns.set(style="whitegrid") 
     fig, ax = plt.subplots(figsize=(20,10))
     rcParams.update({'figure.autolayout': True})
