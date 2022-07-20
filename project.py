@@ -187,27 +187,29 @@ def get_all_video_stats(channel_stats):
 
 #Block to fetch and plot channel data.
 #Fetch youtube channel data from API.
-channel_stats = get_channel_stats(youtube, channel_ids)
+def fetch_and_plot():
+    channel_stats = get_channel_stats(youtube, channel_ids)
 
-# Create a dataframe from the fetched youtube data.
-channel_stats_df = channel_stats_to_df(channel_stats) 
+    # Create a dataframe from the fetched youtube data.
+    channel_stats_df = channel_stats_to_df(channel_stats) 
 
-# Save barplots as images
-save_barplot('channel_name', 'views', channel_stats_df, 'views_by_channe.png')
-save_barplot('channel_name', 'subscribers', channel_stats_df, 'subscribers_by_channel.png')
-save_barplot('channel_name', 'number_of_videos', channel_stats_df, 'videos_by_channel.png')
+    # Save barplots as images
+    save_barplot('channel_name', 'views', channel_stats_df, 'views_by_channe.png')
+    save_barplot('channel_name', 'subscribers', channel_stats_df, 'subscribers_by_channel.png')
+    save_barplot('channel_name', 'number_of_videos', channel_stats_df, 'videos_by_channel.png')
 
-# Block to fetch and plot video stats data
-all_video_stats = get_all_video_stats(channel_stats)
-print(all_video_stats)
-top_10_videos = all_video_stats.sort_values(by='Views', ascending=False).head(10)
+    # Block to fetch and plot video stats data
+    all_video_stats = get_all_video_stats(channel_stats)
+    print(all_video_stats)
+    top_10_videos = all_video_stats.sort_values(by='Views', ascending=False).head(10)
 
-# bar plot top 10 videos
-save_barplot('Views', 'Title', top_10_videos, 'top_10_videos_by_views.png')
-#save_barplot('Views', 'channel_name', top_10_videos, 'top_10_videos_by_views_channel.png')
+    # bar plot top 10 videos
+    save_barplot('Views', 'Title', top_10_videos, 'top_10_videos_by_views.png')
+    #save_barplot('Views', 'channel_name', top_10_videos, 'top_10_videos_by_views_channel.png')
 
 if __name__ == "__main__":
     main()
-
+    fetch_and_plot = fetch_and_plot()
+    print(fetch_and_plot)
 
 
